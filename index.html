@@ -155,13 +155,6 @@
     .btn-restart:hover {
       background-color: #27ae60;
     }
-
-    .btn-clear {
-      background-color: #e74c3c;
-    }
-    .btn-clear:hover {
-      background-color: #c0392b;
-    }
   </style>
 </head>
 <body>
@@ -191,7 +184,6 @@
 
   <div class="controls">
     <button class="btn-restart" onclick="restartGame()">เริ่มเกมใหม่</button>
-    <button class="btn-clear" onclick="clearLeaderboard()">ล้างสถิติ</button>
   </div>
 
   <script>
@@ -350,7 +342,7 @@
       // เรียงจากเวลาน้อยไปมาก (ถ้าเวลาเท่ากัน เรียงตามจำนวนครั้งที่เปิดน้อยไปมาก)
       highScores.sort((a, b) => a.time - b.time || a.moves - b.moves);
       
-      // เก็บแค่ Top 5
+      // เก็บเฉพาะ Top 5
       const topScores = highScores.slice(0, 5);
       localStorage.setItem('memoryGameScores', JSON.stringify(topScores));
     }
@@ -369,13 +361,6 @@
         li.textContent = `${score.name} - ${formatTime(score.time)} (${score.moves} ครั้ง)`;
         highScoresList.appendChild(li);
       });
-    }
-
-    function clearLeaderboard() {
-      if (confirm('คุณต้องการลบสถิติทั้งหมดใช่หรือไม่?')) {
-        localStorage.removeItem('memoryGameScores');
-        displayHighScores();
-      }
     }
 
     createBoard();
